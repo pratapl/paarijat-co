@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Paarijat: Crafted for Quiet Moments</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #faf8f5;
+      --bg-dark: #f2ede6;
+      --text: #2c2a27;
+      --text-muted: #8c7b6b;
+      --accent: #7a8c75;
+      --border: #ddd6cc;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Jost', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 3rem;
+      background: rgba(250, 248, 245, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-bottom-color: var(--border); }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 60%, rgba(122,140,117,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.8rem;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    .hero-tagline {
+      font-family: var(--serif);
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--text-muted);
+      margin: 1.8rem 0 3rem;
+      letter-spacing: 0.06em;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--text);
+      color: var(--bg);
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.9rem 2.4rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-primary:hover { background: var(--text-muted); }
+
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.9rem 2.4rem;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--text-muted); color: var(--text-muted); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+      animation: scrollLine 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+      50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+      100% { opacity: 0; transform: scaleY(1); transform-origin: bottom; }
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 7rem 2rem; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .container-narrow {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── STORY ── */
+    .story {
+      background: var(--bg-dark);
+    }
+
+    .story-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .story-image-placeholder {
+      aspect-ratio: 3/4;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .story-image-placeholder svg {
+      opacity: 0.3;
+      margin-bottom: 0.5rem;
+    }
+
+    .story-content h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .story-content h2 em { font-style: italic; }
+
+    .story-content p {
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+      font-size: 0.95rem;
+      line-height: 1.85;
+    }
+
+    /* ── PILLARS ── */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 4rem;
+    }
+
+    .pillar {
+      background: var(--bg-dark);
+      padding: 2.5rem;
+    }
+
+    .pillar-number {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--border);
+      margin-bottom: 1rem;
+      line-height: 1;
+    }
+
+    .pillar h3 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 0.8rem;
+      color: var(--text);
+    }
+
+    .pillar p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* ── MANIFESTO ── */
+    .manifesto {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .manifesto .section-label { color: rgba(250,248,245,0.4); }
+
+    .manifesto-quote {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--bg);
+      margin-bottom: 2rem;
+    }
+
+    .manifesto-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(250,248,245,0.12);
+    }
+
+    .manifesto-body p {
+      font-size: 0.9rem;
+      color: rgba(250,248,245,0.65);
+      line-height: 1.9;
+    }
+
+    /* ── COLLECTION PREVIEW ── */
+    .collection-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .collection-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .collection-image-wrap {
+      position: relative;
+      aspect-ratio: 2/3;
+      overflow: hidden;
+      margin-bottom: 1.1rem;
+      background: var(--bg-dark);
+    }
+
+    .collection-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .collection-item:hover .collection-image-wrap img {
+      transform: scale(1.03);
+    }
+
+    .collection-image-wrap .img-alt {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .collection-item:hover .collection-image-wrap .img-alt {
+      opacity: 1;
+    }
+
+    .collection-meta {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .collection-name {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: 0.04em;
+    }
+
+    .collection-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    .collection-price {
+      font-size: 0.88rem;
+      color: var(--text);
+      font-weight: 400;
+      margin-top: 0.3rem;
+    }
+
+    .collection-sizes {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .size-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      background: none;
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+
+    .size-btn:hover,
+    .size-btn.selected {
+      border-color: var(--text);
+      color: var(--text);
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .btn-buy {
+      display: block;
+      text-align: center;
+      margin-top: 1rem;
+      background: var(--text);
+      color: var(--bg);
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.85rem 1rem;
+      transition: background 0.2s;
+    }
+    .btn-buy:hover { background: var(--text-muted); }
+
+    /* ── LINEN CARE ── */
+    .care {
+      background: var(--bg-dark);
+    }
+
+    .care-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .care h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 300;
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+    }
+
+    .care h2 em { font-style: italic; }
+
+    .care-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .care-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .care-list li {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .care-list li::before {
+      content: '—';
+      color: var(--border);
+      flex-shrink: 0;
+    }
+
+    .care-pro-tip {
+      margin-top: 2rem;
+      padding: 1.2rem 1.5rem;
+      border-left: 2px solid var(--accent);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+      line-height: 1.8;
+    }
+
+    /* ── EMAIL SIGNUP ── */
+    .signup {
+      text-align: center;
+    }
+
+    .signup h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 0.8rem;
+    }
+
+    .signup h2 em { font-style: italic; }
+
+    .signup-sub {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .signup-form {
+      display: flex;
+      gap: 0;
+      max-width: 420px;
+      margin: 0 auto 1rem;
+    }
+
+    .signup-form input {
+      flex: 1;
+      padding: 0.9rem 1.2rem;
+      border: 1px solid var(--border);
+      border-right: none;
+      background: var(--bg);
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .signup-form input:focus { border-color: var(--text-muted); }
+    .signup-form input::placeholder { color: var(--border); }
+
+    .signup-form button {
+      background: var(--text);
+      color: var(--bg);
+      border: none;
+      padding: 0.9rem 1.8rem;
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .signup-form button:hover { background: var(--text-muted); }
+
+    .signup-note {
+      font-size: 0.72rem;
+      color: var(--border);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── INSTAGRAM ── */
+    .instagram {
+      background: var(--bg-dark);
+      text-align: center;
+    }
+
+    .instagram h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+      font-weight: 300;
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+
+    .instagram-handle {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .instagram-handle:hover { color: var(--text); }
+
+    .instagram-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+      margin: 2.5rem 0;
+    }
+
+    .instagram-tile {
+      aspect-ratio: 1;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bg);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+      cursor: pointer;
+    }
+    .instagram-tile:hover { opacity: 1; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-copy {
+      font-size: 0.7rem;
+      color: var(--border);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--border);
+      margin: 2rem auto;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 5rem 1.5rem; }
+      .story-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .pillars-grid { grid-template-columns: 1fr; gap: 2px; }
+      .manifesto-body { grid-template-columns: 1fr; gap: 1.5rem; }
+      .collection-grid { grid-template-columns: repeat(2, 1fr); }
+      .care-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .instagram-grid { grid-template-columns: repeat(2, 1fr); }
+      footer { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+      .signup-form { flex-direction: column; }
+      .signup-form input { border-right: 1px solid var(--border); border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">Paarijat</a>
+    <ul class="nav-links">
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#values">Values</a></li>
+      <li><a href="#signup">Join Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Slow fashion · Handcrafted in Nepal</p>
+    <h1>Paar<em>ijat</em></h1>
+    <p class="hero-tagline">Crafted for Quiet Moments</p>
+    <div class="hero-cta">
+      <a href="#signup" class="btn-primary">Join the Waitlist</a>
+      <a href="#story" class="btn-secondary">Our Story</a>
+    </div>
+    <div class="hero-scroll"></div>
+  </section>
+
+  <!-- BRAND STORY -->
+  <section class="story" id="story">
+    <div class="container">
+      <div class="story-inner">
+        <div class="story-image-placeholder">
+          <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="18" height="18" rx="1"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <path d="M21 15l-5-5L5 21"/>
+          </svg>
+          Campaign imagery<br>coming soon
+        </div>
+        <div class="story-content">
+          <p class="section-label">The Quiet Elegance</p>
+          <h2>Born from a <em>flower that blooms in the night</em></h2>
+          <p>The Paarijat flower blooms in the quiet of the night, its soft petals unfolding like a whispered promise. By morning, it falls gently to the earth, leaving behind a trace of delicate beauty. This timeless cycle of grace is the heart of our creations.</p>
+          <p>At Paarijat, we craft clothing that is as enduring as it is beautiful. Each piece is made with care and attention, designed to flow with the rhythm of your life. Our garments are gentle, yet resilient, much like the flower that inspired them.</p>
+          <p>Slow, thoughtful fashion for those who choose to live with intention, embracing the beauty in every moment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section id="values">
+    <div class="container">
+      <p class="section-label" style="text-align:center;">What we stand for</p>
+      <div class="divider"></div>
+      <div class="pillars-grid">
+        <div class="pillar">
+          <div class="pillar-number">01</div>
+          <h3>Traceability</h3>
+          <p>Every Paarijat garment can be traced back to the maker, the hands that cut, stitch, and shape it, one stitch at a time. Our clothing isn't just made; it's crafted with intention, love, and care.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-number">02</div>
+          <h3>Sustainability</h3>
+          <p>What we don't use, we repurpose. Leftover fabric is transformed into something new: functional, beautiful, and purposeful. Every scrap has a second chance to shine.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-number">03</div>
+          <h3>Timelessness</h3>
+          <p>Our designs aren't about fleeting trends. They are crafted to be loved, worn, and cherished for years. Pieces that stand the test of time in both style and substance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto">
+    <div class="container-narrow">
+      <p class="section-label">The Paarijat Manifesto</p>
+      <p class="manifesto-quote">"A brand built by women, for women, where every piece carries a story of care, craftsmanship, and empowerment."</p>
+      <div class="manifesto-body">
+        <p>We believe in the power of the hands that make things. From our co-founders to the skilled artisans who bring each garment to life, every stitch is an act of intention.</p>
+        <p>When you choose Paarijat, you're choosing a story of craftsmanship, empowerment, and a more sustainable future. You're choosing to wear something that was made with love.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTION PREVIEW -->
+  <section id="collection">
+    <div class="container">
+      <p class="section-label">Dreaming of Spring · Debut Collection</p>
+      <h2 style="font-family: var(--serif); font-size: clamp(1.8rem,3.5vw,2.8rem); font-weight:300; max-width: 500px; line-height:1.25; margin-bottom:0.5rem;">Pieces <em>crafted to last</em> a lifetime</h2>
+      <div class="collection-grid">
+
+        <!-- Maya -->
+        <div class="collection-item">
+          <div class="collection-image-wrap">
+            <img src="images/IMG_1484_jpg.JPG" alt="MayaBlack Linen Maxi Dress" loading="lazy" />
+          </div>
+          <div class="collection-meta">
+            <div class="collection-name">Maya</div>
+            <div class="collection-subtitle">Black Linen Maxi Dress &nbsp;·&nbsp; Handcrafted in Nepal</div>
+            <div class="collection-price">$55 USD</div>
+            <div class="collection-sizes">
+              <button class="size-btn" onclick="selectSize(this)">S</button>
+              <button class="size-btn" onclick="selectSize(this)">M</button>
+              <button class="size-btn" onclick="selectSize(this)">L</button>
+            </div>
+            <a href="https://buy.stripe.com/placeholder-maya" class="btn-buy" target="_blank">Buy Now</a>
+          </div>
+        </div>
+
+        <!-- Tara -->
+        <div class="collection-item">
+          <div class="collection-image-wrap">
+            <img src="images/IMG_1489_jpg.JPG" alt="TaraBlack Linen Two-Piece Set" loading="lazy" />
+            <img src="images/IMG_3124.JPG" alt="Tara detail" loading="lazy" class="img-alt" />
+          </div>
+          <div class="collection-meta">
+            <div class="collection-name">Tara</div>
+            <div class="collection-subtitle">Black Linen Two-Piece Set &nbsp;·&nbsp; Handcrafted in Nepal</div>
+            <div class="collection-price">$55 USD</div>
+            <div class="collection-sizes">
+              <button class="size-btn" onclick="selectSize(this)">S</button>
+              <button class="size-btn" onclick="selectSize(this)">M</button>
+              <button class="size-btn" onclick="selectSize(this)">L</button>
+            </div>
+            <a href="https://buy.stripe.com/placeholder-tara" class="btn-buy" target="_blank">Buy Now</a>
+          </div>
+        </div>
+
+        <!-- Sheetal -->
+        <div class="collection-item">
+          <div class="collection-image-wrap">
+            <img src="images/IMG_4226 2.JPG" alt="SheetalGingham Wide Skirt" loading="lazy" />
+            <img src="images/IMG_4256.JPG" alt="Sheetal detail" loading="lazy" class="img-alt" />
+          </div>
+          <div class="collection-meta">
+            <div class="collection-name">Sheetal</div>
+            <div class="collection-subtitle">Gingham Wide Skirt &nbsp;·&nbsp; Handcrafted in Nepal</div>
+            <div class="collection-price">$55 USD</div>
+            <div class="collection-sizes">
+              <button class="size-btn" onclick="selectSize(this)">S</button>
+              <button class="size-btn" onclick="selectSize(this)">M</button>
+              <button class="size-btn" onclick="selectSize(this)">L</button>
+            </div>
+            <a href="https://buy.stripe.com/placeholder-sheetal" class="btn-buy" target="_blank">Buy Now</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- LINEN CARE -->
+  <section class="care">
+    <div class="container">
+      <div class="care-inner">
+        <div>
+          <p class="section-label">Caring for your linen</p>
+          <h2>Your linen grows <em>softer with every wash</em></h2>
+          <p class="care-subtitle">Linen loves to wrinkle. It's part of its charm.</p>
+          <ul class="care-list">
+            <li><strong style="color:var(--text);">Wash with love</strong> &nbsp;Machine wash in cold water with similar colors. Treat it gently.</li>
+            <li><strong style="color:var(--text);">Gentle spin</strong> &nbsp;Choose a gentle cycle to keep the fabric happy and soft.</li>
+            <li><strong style="color:var(--text);">No bleach</strong> &nbsp;Linen loves its natural colorkeep it free of bleach.</li>
+            <li><strong style="color:var(--text);">Dry with ease</strong> &nbsp;Tumble dry on low heat or hang it to dry for that fresh, airy feel.</li>
+            <li><strong style="color:var(--text);">Iron lightly</strong> &nbsp;For a crisp look, iron on low while still a little damp.</li>
+          </ul>
+          <div class="care-pro-tip">
+            Your linen will grow softer with each wash, becoming more beautiful and comfortable over time.
+          </div>
+        </div>
+        <div class="story-image-placeholder" style="aspect-ratio: 4/5;">
+          <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          Fabric detail
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMAIL SIGNUP -->
+  <section class="signup" id="signup">
+    <div class="container-narrow">
+      <p class="section-label">Be the first to know</p>
+      <h2>Join us for <em>Dreaming of Spring</em></h2>
+      <p class="signup-sub">Our debut collection is almost here. Sign up for early access, behind-the-scenes stories, and a note from Neena.</p>
+      <form class="signup-form" onsubmit="handleSignup(event)">
+        <input type="email" placeholder="Your email address" required />
+        <button type="submit">Join</button>
+      </form>
+      <p class="signup-note">No noise. Only quiet, beautiful things.</p>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section class="instagram">
+    <div class="container">
+      <h2>Follow the journey</h2>
+      <a href="https://instagram.com/paarijat.co" target="_blank" class="instagram-handle">@paarijat.co</a>
+      <div class="instagram-grid">
+        <div class="instagram-tile">Coming Soon</div>
+        <div class="instagram-tile">Coming Soon</div>
+        <div class="instagram-tile">Coming Soon</div>
+        <div class="instagram-tile">Coming Soon</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#" class="footer-logo">Paarijat</a>
+    <ul class="footer-links">
+      <li><a href="#story">Story</a></li>
+      <li><a href="#values">Values</a></li>
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="https://instagram.com/paarijat.co" target="_blank">Instagram</a></li>
+    </ul>
+    <p class="footer-copy">© 2025 Paarijat. Crafted with care.</p>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Email signup
+    function handleSignup(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Thank you';
+      btn.style.background = 'var(--accent)';
+      e.target.querySelector('input').value = '';
+      setTimeout(() => {
+        btn.textContent = 'Join';
+        btn.style.background = '';
+      }, 3000);
+    }
+
+    // Size selector
+    function selectSize(btn) {
+      const siblings = btn.closest('.collection-sizes').querySelectorAll('.size-btn');
+      siblings.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    }
+
+    // Smooth anchor scroll with nav offset
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href').slice(1);
+        if (!id) return;
+        const el = document.getElementById(id);
+        if (el) {
+          e.preventDefault();
+          const offset = 80;
+          const top = el.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
