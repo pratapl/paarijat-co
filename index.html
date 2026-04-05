@@ -358,7 +358,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: top;
+      object-position: center;
       display: block;
       transition: transform 0.6s ease;
     }
@@ -366,6 +366,10 @@
     .collection-item:hover .collection-image-wrap img {
       transform: scale(1.03);
     }
+
+    /* Per-product scale so all skirts appear the same proportion */
+    .img-scale-madhavi img       { transform: scale(0.78); }
+    .img-scale-madhavi:hover img { transform: scale(0.81); }
 
     .collection-image-wrap .img-alt {
       position: absolute;
@@ -735,34 +739,34 @@
       <p class="section-label">Dreaming of Spring · Debut Collection</p>
       <div class="collection-grid">
 
-        <!-- Maya -->
+        <!-- Madhavi -->
         <div class="collection-item">
-          <div class="collection-image-wrap">
-            <img src="images/maya_model.JPG" alt="Maya Black Linen Maxi Dress" loading="lazy" />
-            <img src="images/maya_set2.JPG" alt="Maya detail" loading="lazy" class="img-alt" />
+          <div class="collection-image-wrap img-scale-madhavi" style="background:#f9f9f8;">
+            <img src="images/madhavi skirt.jpg" alt="Madhavi Black Linen Skirt" loading="lazy" />
+            <img src="images/madhavi4.jpg" alt="Madhavi detail" loading="lazy" class="img-alt" />
           </div>
           <div class="collection-meta">
-            <div class="collection-name">Maya</div>
-            <div class="collection-subtitle">Black Linen Maxi Dress &nbsp;·&nbsp; Handcrafted in Nepal</div>
+            <div class="collection-name">Madhavi</div>
+            <div class="collection-subtitle">Black Linen-Blend Skirt</div>
             <div class="collection-price">$55 USD</div>
             <div class="collection-sizes">
               <button class="size-btn" onclick="selectSize(this)">S</button>
               <button class="size-btn" onclick="selectSize(this)">M</button>
               <button class="size-btn" onclick="selectSize(this)">L</button>
             </div>
-            <a href="https://buy.stripe.com/placeholder-maya" class="btn-buy" target="_blank">Buy Now</a>
+            <a href="https://buy.stripe.com/placeholder-madhavi" class="btn-buy" target="_blank">Buy Now</a>
           </div>
         </div>
 
         <!-- Tara -->
         <div class="collection-item">
           <div class="collection-image-wrap">
-            <img src="images/tara_top.JPG" alt="Tara Black Linen Two-Piece Set" loading="lazy" />
-            <img src="images/tara_set.jpg" alt="Tara detail" loading="lazy" class="img-alt" />
+            <img src="images/tara skirt.jpeg" alt="Tara Gingham Wide Skirt" loading="lazy" />
+            <img src="images/tara1.jpg" alt="Tara detail" loading="lazy" class="img-alt" />
           </div>
           <div class="collection-meta">
             <div class="collection-name">Tara</div>
-            <div class="collection-subtitle">Black Linen Two-Piece Set &nbsp;·&nbsp; Handcrafted in Nepal</div>
+            <div class="collection-subtitle">Gingham Cotton Skirt</div>
             <div class="collection-price">$55 USD</div>
             <div class="collection-sizes">
               <button class="size-btn" onclick="selectSize(this)">S</button>
@@ -773,22 +777,21 @@
           </div>
         </div>
 
-        <!-- Sheetal -->
+        <!-- Maya Skirt -->
         <div class="collection-item">
-          <div class="collection-image-wrap">
-            <img src="images/Sheetal.jpg" alt="Sheetal Gingham Wide Skirt" loading="lazy" />
-            <img src="images/Sheetal_skirt.JPG" alt="Sheetal detail" loading="lazy" class="img-alt" />
+          <div class="collection-image-wrap" style="background:#f9f9f8;">
+            <img src="images/maya skirt.jpg" alt="Maya Linen Skirt" loading="lazy" />
           </div>
           <div class="collection-meta">
-            <div class="collection-name">Sheetal</div>
-            <div class="collection-subtitle">Gingham Wide Skirt &nbsp;·&nbsp; Handcrafted in Nepal</div>
+            <div class="collection-name">Maya</div>
+            <div class="collection-subtitle">Beige Linen-Blend Skirt</div>
             <div class="collection-price">$55 USD</div>
             <div class="collection-sizes">
               <button class="size-btn" onclick="selectSize(this)">S</button>
               <button class="size-btn" onclick="selectSize(this)">M</button>
               <button class="size-btn" onclick="selectSize(this)">L</button>
             </div>
-            <a href="https://buy.stripe.com/placeholder-sheetal" class="btn-buy" target="_blank">Buy Now</a>
+            <a href="https://buy.stripe.com/placeholder-maya-skirt" class="btn-buy" target="_blank">Buy Now</a>
           </div>
         </div>
 
@@ -894,10 +897,10 @@
       <h2>Follow the journey</h2>
       <a href="https://instagram.com/paarijat.co" target="_blank" class="instagram-handle">@paarijat.co</a>
       <div class="instagram-grid">
-        <div class="instagram-tile"><img src="images/skirts.JPG" alt="Paarijat skirts" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" /></div>
-        <div class="instagram-tile"><img src="images/maya_set3.jpg" alt="Maya set" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" /></div>
+        <div class="instagram-tile"><img src="images/kamala3.JPG" alt="Kamala" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" /></div>
+        <div class="instagram-tile"><img src="images/sewing.jpg" alt="Sewing" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" /></div>
         <div class="instagram-tile"><img src="images/tara_top2.jpg" alt="Tara top" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" /></div>
-        <div class="instagram-tile"><img src="images/Sheetal_skirt2.JPG" alt="Sheetal skirt" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" /></div>
+        <div class="instagram-tile"><img src="images/backdrop.JPG" alt="Backdrop" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" /></div>
       </div>
     </div>
   </section>

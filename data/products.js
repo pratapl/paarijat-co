@@ -4,54 +4,53 @@
 
 const PRODUCTS = [
   {
-    id: "maya",
-    name: "Maya",
-    subtitle: "Black Linen Maxi Dress",
-    description: "Wrap yourself in the quiet elegance of the Maya — a floor-length linen dress with a timeless silhouette. Designed to flow with you through every season, it moves like a soft whisper from day to evening.",
+    id: "madhavi",
+    name: "Madhavi",
+    subtitle: "Black Linen-Blend Skirt",
+    description: "Wrap yourself in the quiet elegance of the Madhavi — a fluid black linen skirt with a timeless silhouette. Designed to flow with you through every season, it moves like a soft whisper from day to evening.",
     price: 55,
     currency: "USD",
     sizes: ["S", "M", "L"],
     fabric: "100% natural linen",
     origin: "Handcrafted in Nepal",
     images: [
-      "images/IMG_1484_jpg.JPG"
+      "images/madhavi skirt.jpg",
+      "images/madhavi4.jpg"
     ],
-    stripeUrl: "https://buy.stripe.com/placeholder-maya",
+    stripeUrl: "https://buy.stripe.com/placeholder-madhavi",
     available: true
   },
   {
-    id: "tara",
+    id: "tara-skirt",
     name: "Tara",
-    subtitle: "Black Linen Two-Piece Set",
-    description: "The Tara set — an off-shoulder linen crop top paired with wide-leg trousers. Each piece wears beautifully alone or together, made for women who move through the world with quiet confidence.",
+    subtitle: "Gingham Cotton Skirt",
+    description: "The Tara — a generous, gathered skirt in black and white gingham. Soft, playful, and unmistakably handcrafted. Pair it with a simple top or let it speak for itself.",
     price: 55,
     currency: "USD",
     sizes: ["S", "M", "L"],
     fabric: "100% natural linen",
     origin: "Handcrafted in Nepal",
     images: [
-      "images/IMG_1488_jpg.JPG",
-      "images/IMG_1489_jpg.JPG",
-      "images/IMG_3124.JPG"
+      "images/tara skirt.jpeg",
+      "images/tara1.jpg"
     ],
     stripeUrl: "https://buy.stripe.com/placeholder-tara",
     available: true
   },
   {
-    id: "sheetal",
-    name: "Sheetal",
-    subtitle: "Gingham Wide Skirt",
-    description: "The Sheetal — a generous, gathered skirt in black and white gingham. Soft, playful, and unmistakably handcrafted. Pair it with a simple top or let it speak for itself.",
+    id: "maya-skirt",
+    name: "Maya",
+    subtitle: "Beige Linen-Blend Skirt",
+    description: "The Maya Skirt — a fluid linen midi skirt with an easy, graceful drape. Wear it with anything, go anywhere. Made to be lived in.",
     price: 55,
     currency: "USD",
     sizes: ["S", "M", "L"],
     fabric: "100% natural linen",
     origin: "Handcrafted in Nepal",
     images: [
-      "images/IMG_4226 2.JPG",
-      "images/IMG_4256.JPG"
+      "images/maya skirt.jpg"
     ],
-    stripeUrl: "https://buy.stripe.com/placeholder-sheetal",
+    stripeUrl: "https://buy.stripe.com/placeholder-maya-skirt",
     available: true
   }
 ];
